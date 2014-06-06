@@ -1,6 +1,8 @@
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <string>
+#include "main_functions.h"
+
 using namespace std;
 
 //default x = 0, y = 0, z = 0
@@ -22,7 +24,7 @@ typedef float mm;
 ISLA gISLA;
 unsigned int gLINEA = 0;
 int gALTURA_SEGURA = 0;
-POS gPR; //posición referencial
+POS gPR; //posicion referencial
 
 char* nueva_linea(unsigned int incremento = 10) {
 	unsigned int nueva_linea_num = gLINEA + incremento;
@@ -36,24 +38,24 @@ char* nueva_linea(unsigned int incremento = 10) {
 	return iso;
 }
 
-//Generar un comentario para código ISO - Para DEBUG
-//return: código ISO en formato char[]
+//Generar un comentario para codigo ISO - Para DEBUG
+//return: codigo ISO en formato char[]
 char* set_movimiento_rapido(char _debug[]) {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 dígito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s (%s)\n", nueva_linea(), _debug);
 	return iso;
 }
 
-//Generar código ISO que mueve filo en horizontal (x, y)
-//input: original - posición actual del filo
-//       final - posición final del filo (sólo tiene en cuenta x, y)
-//return: código ISO en formato char[]
+//Generar codigo ISO que mueve filo en horizontal (x, y)
+//input: original - posicion actual del filo
+//       final - posicion final del filo (solo tiene en cuenta x, y)
+//return: codigo ISO en formato char[]
 char* set_movimiento_rapido() {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s G00\n", nueva_linea());
 	return iso;
 }
@@ -61,69 +63,69 @@ char* set_movimiento_rapido() {
 char* set_movimiento_lineal() {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s G01\n", nueva_linea());
 	return iso;
 }
 
-//Generar código ISO que mueve filo en horizontal (x, y)
-//input: original - posición actual del filo
-//       final - posición final del filo (sólo tiene en cuenta x, y)
-//return: código ISO en formato char[]
+//Generar codigo ISO que mueve filo en horizontal (x, y)
+//input: original - posicion actual del filo
+//       final - posicion final del filo (solo tiene en cuenta x, y)
+//return: codigo ISO en formato char[]
 char* mover_filo_xy(mm x, mm y) {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 dígito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s X%.3f Y%.3f\n", nueva_linea(), x + gPR.x,
 			y + gPR.y);
 	return iso;
 }
 
-//Generar código ISO que mueve filo en eje X
-//input: original - posición actual del filo
-//	     final - posición final del filo (sólo tiene en cuenta X)
-//return:  código ISO en formato char[]
+//Generar codigo ISO que mueve filo en eje X
+//input: original - posicion actual del filo
+//	     final - posicion final del filo (solo tiene en cuenta X)
+//return:  codigo ISO en formato char[]
 char* mover_filo_x(mm x) {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s X%.3f\n", nueva_linea(), x + gPR.x);
 	return iso;
 }
 
-//Generar código ISO que mueve filo en eje Y
-//input: original - posición actual del filo
-//       final - posición final del filo (sólo tiene en cuenta Y)
-//return:  código ISO en formato char[]
+//Generar codigo ISO que mueve filo en eje Y
+//input: original - posicion actual del filo
+//       final - posicion final del filo (solo tiene en cuenta Y)
+//return:  codigo ISO en formato char[]
 char* mover_filo_y(mm y) {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s Y%.3f\n", nueva_linea(), y + gPR.y);
 	return iso;
 }
 
-//Generar código ISO que mueve filo en eje Z
-//input: original - posición actual del filo
-//       final - posición final del filo (sólo tiene en cuenta Z)
-//return: código ISO en formato char[]
+//Generar codigo ISO que mueve filo en eje Z
+//input: original - posicion actual del filo
+//       final - posicion final del filo (solo tiene en cuenta Z)
+//return: codigo ISO en formato char[]
 char* mover_filo_z(mm z) {
 	int size_iso = 100;
 	static char iso[100];
-	//editar precisión aquí:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
+	//editar precision aqui:  entero - X%.0f Y%.0f  ,  2 digito float- X%.2f Y%.2f
 	snprintf(iso, size_iso, "%s Z%.3f\n", nueva_linea(), z + gPR.z);
 	return iso;
 }
 
-//Generar código ISO para inicializar las parametros de filo
+//Generar codigo ISO para inicializar las parametros de filo
 // - plano xy
 // - coordenada absoluta
 // - vel_filo_mm: velocidad de avance, mm/min
-// - rpm: velocidad de rotación del filo , rpm
-// - unidad de dimensión, milimetro
+// - rpm: velocidad de rotacion del filo , rpm
+// - unidad de dimension, milimetro
 //input : - vel_filo_mm: velocidad de avance, mm/min
-//        - rpm: velocidad de rotación del filo , rpm
-//return: código ISO generado para inicializar
+//        - rpm: velocidad de rotacion del filo , rpm
+//return: codigo ISO generado para inicializar
 string inicializar_filo(unsigned int vel_filo_mm, unsigned int rpm) {
 	string iso;
 	int size_iso_aux = 100;
@@ -291,7 +293,7 @@ string generar_zigzag_con_isla(mm z, mm lado_x, mm lado_y, mm filo_radio,
 	return iso;
 }
 
-//saltar desde posición acutal a posición obj x y
+//saltar desde posicion acutal a posicion obj x y
 string saltar(mm z, mm obj_x, mm obj_y) {
 	string iso;
 	iso.append(mover_filo_z(gALTURA_SEGURA));
@@ -302,12 +304,12 @@ string saltar(mm z, mm obj_x, mm obj_y) {
 	return iso;
 }
 
-string generar_limpieza_de_pared(mm z, mm lado_x, mm lado_y, mm filo_radio) { //z = profundidad que está afilando
+string generar_limpieza_de_pared(mm z, mm lado_x, mm lado_y, mm filo_radio) { //z = profundidad que esta afilando
 	string iso;
 	//limpieza de pared
 	//iso.append("DEBUG: Limpieza de pared\n");
 
-	//inicializar la posición
+	//inicializar la posicion
 	iso.append(set_movimiento_rapido());
 	//iso.append(mover_filo_z(gALTURA_SEGURA));
 	iso.append(mover_filo_xy(filo_radio, lado_y - filo_radio));
